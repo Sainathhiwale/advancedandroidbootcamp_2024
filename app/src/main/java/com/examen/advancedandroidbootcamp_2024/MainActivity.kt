@@ -15,6 +15,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         mainBinding.buttonSubmit.setOnClickListener(this)
+        mainBinding.buttonStart.setOnClickListener(this)
+
         val user = getUserData()
         mainBinding.user = getUserData()
     }
@@ -24,7 +26,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.button_submit ->{
                 getTextDisplay()
             }
+            R.id.button_start ->{
+                startProgressBar();
+            }
         }
+    }
+
+    private fun startProgressBar() {
+        if (mainBinding.progressCircular.visibility == View.INVISIBLE){
+            mainBinding.progressCircular.visibility = View.VISIBLE
+            mainBinding.buttonStart.text = "Stop"
+        }else{
+            mainBinding.progressCircular.visibility = View.INVISIBLE
+            mainBinding.buttonStart.text = "Start"
+        }
+
     }
 
     private fun getTextDisplay() {
