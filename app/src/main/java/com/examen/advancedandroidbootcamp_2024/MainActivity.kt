@@ -1,20 +1,39 @@
 package com.examen.advancedandroidbootcamp_2024
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.databinding.DataBindingUtil
+import com.examen.advancedandroidbootcamp_2024.databinding.ActivityMainBinding
+import com.examen.advancedandroidbootcamp_2024.model.User
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+    private lateinit var mainBinding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        mainBinding.buttonSubmit.setOnClickListener(this)
+        val user = getUserData()
+        mainBinding.user = getUserData()
+    }
+
+    override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.button_submit ->{
+                getTextDisplay()
+            }
         }
+    }
+
+    private fun getTextDisplay() {
+        val text = mainBinding.editText.text.toString()
+        mainBinding.textView.text = text
+    }
+
+    // binding object data to xml file directly
+    fun getUserData():User{
+        return User("Sainath",23,"Pune","Sainath Hiwale")
     }
 }
