@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.examen.advancedandroidbootcamp_2024.databinding.ActivityMainBinding
+import com.examen.advancedandroidbootcamp_2024.model.User
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mainBinding: ActivityMainBinding
@@ -14,6 +15,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         mainBinding.buttonSubmit.setOnClickListener(this)
+        val user = getUserData()
+        mainBinding.user = getUserData()
     }
 
     override fun onClick(v: View?) {
@@ -27,5 +30,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private fun getTextDisplay() {
         val text = mainBinding.editText.text.toString()
         mainBinding.textView.text = text
+    }
+
+    // binding object data to xml file directly
+    fun getUserData():User{
+        return User("Sainath",23,"Pune","Sainath Hiwale")
     }
 }
