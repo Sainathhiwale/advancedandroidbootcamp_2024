@@ -4,36 +4,33 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.examen.advancedandroidbootcamp_2024.databinding.ActivityMainBinding
-import com.examen.advancedandroidbootcamp_2024.model.User
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var mainBinding: ActivityMainBinding
-
+    private lateinit var viewModel: MainActivityViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
 
-        mainBinding.buttonSubmit.setOnClickListener(this)
-        val user = getUserData()
-        mainBinding.user = getUserData()
+        mainBinding.textView.text =viewModel.getCurrentCount().toString()
+        mainBinding.buttonCount.setOnClickListener(this)
+
     }
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.button_submit ->{
-                getTextDisplay()
+            R.id.button_count ->{
+                getCountDisplay()
             }
         }
     }
 
-    private fun getTextDisplay() {
-        val text = mainBinding.editText.text.toString()
-        mainBinding.textView.text = text
+    fun getCountDisplay(){
+        mainBinding.textView.text = viewModel.getUpdateCount().toString()
     }
 
-    // binding object data to xml file directly
-    fun getUserData():User{
-        return User("Sainath",23,"Pune","Sainath Hiwale")
-    }
+
 }

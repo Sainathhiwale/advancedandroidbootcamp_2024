@@ -3,4 +3,6 @@
     <string name="edit_text_description">input</string>
     <string name="enter_text">Enter Text</string>
     <string name="submit">Submit</string>
+    <string name="start">Start</string>
+    <string name="count">Count</string>
 </resources>
