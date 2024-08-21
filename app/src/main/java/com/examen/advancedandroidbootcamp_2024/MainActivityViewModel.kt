@@ -1,20 +1,18 @@
 package com.examen.advancedandroidbootcamp_2024
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 
-class MainActivityViewModel(startingTotal: Int) : ViewModel() {
-    private var total = MutableLiveData<Int>()
-    val totalData: LiveData<Int>
-        get() = total
+class MainActivityViewModel() : ViewModel() {
+     var count = MutableLiveData<Int>()
 
     init {
-        total.value = startingTotal
+        count.value = 0
     }
 
-    fun setTotal(input: Int) {
-        total.value = (total.value)?.plus(input)
+    fun updateCount() {
+        count.value = count.value?.plus(1)
     }
+
 }

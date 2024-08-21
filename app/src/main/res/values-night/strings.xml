@@ -5,4 +5,5 @@
     <string name="submit">Submit</string>
     <string name="start">Start</string>
     <string name="count">Count</string>
+    <string name="input_hint">0</string>
 </resources>
